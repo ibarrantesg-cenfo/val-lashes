@@ -46,8 +46,9 @@ services.forEach((entry,i)=>{
   const title=document.createElement('h3');title.textContent=entry.name;
   const description=document.createElement('p');description.textContent=entry.description||'Consultá detalles de este servicio.';
   const details=document.createElement('p');details.className='service-meta';
-  const parts=[entry.price,entry.duration].filter(v=>typeof v==='string'&&v.trim());
-  details.textContent=parts.length?parts.join(' · '):'Precio y duración: consultar';
+  const base=typeof entry.price==='string'?entry.price.trim():'';
+  const duration=typeof entry.duration==='string'?entry.duration.trim():'';
+  details.textContent=[base?'Precio base: '+base:'Precio base: por confirmar',duration?'Duración: '+duration:''].filter(Boolean).join(' · ');
   const link=document.createElement('a');link.href='#reservar';link.textContent='Consultar cita ↗';
   link.addEventListener('click',()=>{serviceSelect.value=entry.id;});
   card.append(visual,tag,title,description,details,link);catalog.append(card);
@@ -84,7 +85,19 @@ function refreshModality(){
   homeFields.hidden=!home;
   districtInput.required=home;
   if(!home) districtInput.value='';
+  refreshQuote();
 }
+function refreshQuote(){
+  const selected=services.find(item=>item.id===serviceSelect.value);
+  const base=typeof selected?.price==='string'?selected.price.trim():'';
+  const baseLabel=document.querySelector('#quote-base');
+  const travelLabel=document.querySelector('#quote-travel');
+  baseLabel.textContent=selected?(base?'Precio base de '+selected.name+': '+base:'Precio base de '+selected.name+': por confirmar'):'Seleccioná un servicio para consultar su precio base.';
+  const home=selectedModality()==='domicilio';
+  travelLabel.textContent=home?'A domicilio: el costo de traslado se cotiza según zona o distancia'+(districtInput.value.trim()?' ('+districtInput.value.trim()+')':'')+'.':'En el estudio: sin recargo de traslado a domicilio; total sujeto a confirmación.';
+}
+serviceSelect.addEventListener('change',refreshQuote);
+districtInput.addEventListener('input',refreshQuote);
 modalityInputs.forEach(input=>input.addEventListener('change',refreshModality));
 refreshModality();
 if(!validPhone){
@@ -98,7 +111,9 @@ document.querySelector('#booking-form').addEventListener('submit',event=>{
   if(!event.currentTarget.reportValidity())return;
   if(!validPhone){feedback.textContent='No se envió ninguna solicitud: falta configurar el WhatsApp de VAL Lashes.';return;}
   const client=document.querySelector('#client-name').value.trim();
-  const service=services.find(item=>item.id===serviceSelect.value)?.name;
+  const selectedService=services.find(item=>item.id===serviceSelect.value);
+  const service=selectedService?.name;
+  const base=typeof selectedService?.price==='string'?selectedService.price.trim():'';
   const mode=selectedModality();
   const district=districtInput.value.trim();
   const date=dateInput.value;
@@ -111,12 +126,13 @@ document.querySelector('#booking-form').addEventListener('submit',event=>{
     '¡Hola, Vale! Me gustaría consultar una cita en VAL Lashes.',
     'Nombre: '+client,
     'Servicio: '+service,
+    'Precio base publicado: '+(base||'Por confirmar'),
     'Modalidad: '+(mode==='domicilio'?'A domicilio':'En el estudio'),
-    ...(mode==='domicilio'?['Zona de atención: '+district]:[]),
+    ...(mode==='domicilio'?['Zona de atención: '+district,'Traslado: pendiente de cotización según zona o distancia']:[]),
     'Fecha preferida: '+date,
     'Hora preferida: '+time,
     ...(msg?['Consulta: '+msg]:[]),
-    'Entiendo que el precio total y la disponibilidad deben confirmarse antes de agendar.'
+    'Solicito confirmar el precio final (incluido el traslado, cuando corresponda) y disponibilidad antes de reservar.'
   ];
   const url='https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
   feedback.textContent='Se abrirá WhatsApp con tu consulta preparada. Enviá el mensaje para contactar a Vale.';
