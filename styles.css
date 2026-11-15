@@ -14,3 +14,20 @@ html{scroll-padding-top:95px}
 .faq-list details p{max-width:750px;color:#71646b;margin:10px 0 0}
 .setup-note{background:#fff0f3;color:#714555;padding:12px;border-radius:10px;border:1px solid #ecc8d6}
 @media (max-width:930px) and (min-width:701px){.site-menu{gap:9px;font-size:.69rem}}
+
+/* Catálogo v3: filtros, tarjetas dinámicas y adaptación móvil */
+.catalog-controls{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 25px}
+.catalog-filter{border:1px solid #dfbdc9;background:#fff;color:#714c60;border-radius:99px;padding:10px 16px;font:700 .79rem var(--font-text);transition:background .15s,color .15s}
+.catalog-filter:hover{background:#fae6ec}
+.catalog-filter.active{background:var(--ink);border-color:var(--ink);color:#fff}
+#service-catalog{grid-template-columns:repeat(3,minmax(0,1fr))}
+#service-catalog .service-card{min-height:365px;transition:transform .2s,box-shadow .2s}
+#service-catalog .service-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #44343d12}
+#service-catalog .service-illustration{height:116px}
+#service-catalog .service-illustration span{font-size:4.3rem}
+#service-catalog .service-card h3{font-size:1.73rem}
+#service-catalog .service-tag{margin-top:15px}
+#service-catalog .service-meta{font-size:.79rem;margin-top:auto;margin-bottom:13px}
+#service-catalog .service-card a{margin-top:0}
+@media(max-width:930px){#service-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#service-catalog{grid-template-columns:1fr}.catalog-controls{flex-wrap:nowrap;overflow-x:auto;padding-bottom:9px;scrollbar-width:thin}.catalog-filter{white-space:nowrap;flex:none}#service-catalog .service-card{min-height:320px}}
