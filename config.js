@@ -1,5 +1,9 @@
-/* Catálogo oficial VAL Lashes. Editar price y duration cuando Vale los confirme.
-   El sitio no inventa precios ni tiempos. WhatsApp formato 506XXXXXXXX. */
+/* Catálogo oficial VAL Lashes. La propiedad price representa el PRECIO BASE
+   de referencia, no el total definitivo. Ejemplo confirmado: price:"₡12000".
+   Dejar price:"" hasta tener un precio realmente aprobado por Vale.
+   Las visitas a domicilio requieren cotización individual de traslado según
+   zona o distancia. No se calculan kilómetros ni se pide dirección exacta.
+   WhatsApp: prefijo de país + número, ejemplo 506XXXXXXXX. */
 window.VAL_CONFIG = {
   whatsapp: "",
   instagram: "",
