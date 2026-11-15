@@ -75,25 +75,51 @@ try{
 
 const phone = String(config.whatsapp || '').replace(/\D/g,'');
 const validPhone=/^\d{10,15}$/.test(phone);
+const homeFields=document.querySelector('#home-fields');
+const districtInput=document.querySelector('#district');
+const modalityInputs=Array.from(document.querySelectorAll('input[name="modality"]'));
+const selectedModality=()=>modalityInputs.find(input=>input.checked)?.value || 'estudio';
+function refreshModality(){
+  const home=selectedModality()==='domicilio';
+  homeFields.hidden=!home;
+  districtInput.required=home;
+  if(!home) districtInput.value='';
+}
+modalityInputs.forEach(input=>input.addEventListener('change',refreshModality));
+refreshModality();
 if(!validPhone){
   const note=document.querySelector('#booking-setup-note');
   note.hidden=false;
-  note.textContent='Reservas en preparación: pronto podrás enviar tu solicitud por WhatsApp. Por ahora, este formulario es una demostración.';
+  note.textContent='Las consultas por WhatsApp todavía no están habilitadas. Este formulario es una vista de demostración.';
 }
-
 document.querySelector('#booking-form').addEventListener('submit',event=>{
   event.preventDefault();
   feedback.textContent='';
   if(!event.currentTarget.reportValidity())return;
-  if(!validPhone){feedback.textContent='WhatsApp todavía no está configurado. Esta demostración no envía solicitudes.';return;}
-  const service=services.find(item=>item.id===serviceSelect.value)?.name || serviceSelect.value;
+  if(!validPhone){feedback.textContent='No se envió ninguna solicitud: falta configurar el WhatsApp de VAL Lashes.';return;}
+  const client=document.querySelector('#client-name').value.trim();
+  const service=services.find(item=>item.id===serviceSelect.value)?.name;
+  const mode=selectedModality();
+  const district=districtInput.value.trim();
   const date=dateInput.value;
   const time=document.querySelector('#time').value;
   const msg=document.querySelector('#message').value.trim();
-  if(date < localISODate(new Date())){feedback.textContent='Seleccioná una fecha de hoy en adelante.';return;}
-  const text=`¡Hola, Vale! Quisiera consultar disponibilidad para ${service}, el ${date} a las ${time}.${msg ? ` Consulta: ${msg}` : ''} Entiendo que la cita solo queda confirmada cuando me respondás.`;
-  const url=`https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-  feedback.textContent='Se abrirá WhatsApp con tu mensaje preparado. La cita todavía no está confirmada.';
+  if(!service){feedback.textContent='Seleccioná un servicio del catálogo.';return;}
+  if(date<localISODate(new Date())){feedback.textContent='Seleccioná una fecha de hoy en adelante.';return;}
+  if(mode==='domicilio'&&!district){feedback.textContent='Indicá el cantón o distrito para cotizar el traslado.';return;}
+  const lines=[
+    '¡Hola, Vale! Me gustaría consultar una cita en VAL Lashes.',
+    'Nombre: '+client,
+    'Servicio: '+service,
+    'Modalidad: '+(mode==='domicilio'?'A domicilio':'En el estudio'),
+    ...(mode==='domicilio'?['Zona de atención: '+district]:[]),
+    'Fecha preferida: '+date,
+    'Hora preferida: '+time,
+    ...(msg?['Consulta: '+msg]:[]),
+    'Entiendo que el precio total y la disponibilidad deben confirmarse antes de agendar.'
+  ];
+  const url='https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
+  feedback.textContent='Se abrirá WhatsApp con tu consulta preparada. Enviá el mensaje para contactar a Vale.';
   const win=window.open(url,'_blank','noopener,noreferrer');
   if(!win) window.location.assign(url);
 });
