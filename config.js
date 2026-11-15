@@ -1,6 +1,6 @@
 /* Catálogo oficial VAL Lashes. La propiedad price representa el PRECIO BASE
    de referencia, no el total definitivo. Ejemplo confirmado: price:"₡12000".
-   IMPORTANTE: se interpretaron 10, 12, 15 como miles de colones (validar con Vale).\n   Los demás precios permanecen vacíos hasta confirmación.
+   Precios base de clásicas, híbridas, hawaianas, egipcias y volúmenes confirmados.\n   Los demás precios permanecen vacíos hasta confirmación.
    Las visitas a domicilio requieren cotización individual de traslado según
    zona o distancia. No se calculan kilómetros ni se pide dirección exacta.
    WhatsApp: prefijo de país + número, ejemplo 506XXXXXXXX. */
