@@ -80,7 +80,14 @@
     <label for="message">¿Algo que debamos saber? (opcional)</label>
     <textarea id="message" rows="3" maxlength="250" placeholder="Contanos tus dudas o preferencias. No incluyás datos médicos ni dirección exacta."></textarea>
     <div class="quote-preview" aria-live="polite"><strong>Resumen de precio</strong><p id="quote-base">Seleccioná un servicio para consultar su precio base.</p><p id="quote-travel">Modalidad: estudio. Precio final sujeto a confirmación.</p><strong class="quote-total">Total final: lo confirma Vale antes de agendar.</strong></div><div class="quote-notice"><strong>Solicitud sin compromiso</strong><span>El precio base es orientativo. El costo de traslado depende de la zona o distancia. El horario y total final siempre requieren confirmación de Vale.</span></div>
-    <button type="submit" class="btn btn-primary">Consultar por WhatsApp ↗</button>
+    <button type="submit" class="btn btn-primary">Revisar mi solicitud →</button>
+    <div id="request-review" class="request-review" hidden>
+      <h3>Revisá tu consulta ♡</h3>
+      <p>Este es el mensaje que vas a enviar. Revisalo antes de abrir WhatsApp.</p>
+      <pre id="request-text" class="request-text"></pre>
+      <p class="field-help">No se genera una reserva automática. Vale confirmará disponibilidad, cobertura y precio final.</p>
+      <div class="review-actions"><button type="button" id="edit-request" class="review-edit">Editar datos</button><button type="button" id="send-request" class="btn btn-primary">Abrir WhatsApp ↗</button></div>
+    </div>
     <p id="form-feedback" role="status" aria-live="polite" class="small-note"></p>
   </form>
 </div></section>
