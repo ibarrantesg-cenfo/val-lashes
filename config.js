@@ -1,6 +1,6 @@
 /* Catálogo oficial VAL Lashes. La propiedad price representa el PRECIO BASE
    de referencia, no el total definitivo. Ejemplo confirmado: price:"₡12000".
-   Dejar price:"" hasta tener un precio realmente aprobado por Vale.
+   IMPORTANTE: se interpretaron 10, 12, 15 como miles de colones (validar con Vale).\n   Los demás precios permanecen vacíos hasta confirmación.
    Las visitas a domicilio requieren cotización individual de traslado según
    zona o distancia. No se calculan kilómetros ni se pide dirección exacta.
    WhatsApp: prefijo de país + número, ejemplo 506XXXXXXXX. */
@@ -10,15 +10,20 @@ window.VAL_CONFIG = {
   publicLocation: "",
   openingHours: "",
   services: [
-    { id:"clasicas", name:"Extensiones clásicas", category:"extensiones", price:"", duration:"", description:"Un estilo de extensiones para realzar tu mirada. Consultá con Vale el acabado disponible." },
-    { id:"hibridas", name:"Extensiones híbridas", category:"extensiones", price:"", duration:"", description:"Una opción de extensiones que podés explorar junto a Vale para encontrar tu estilo." },
-    { id:"volumen", name:"Volumen", category:"extensiones", price:"", duration:"", description:"Consultá las opciones de volumen disponibles y el efecto que querés lograr." },
-    { id:"rimel", name:"Efecto rímel", category:"extensiones", price:"", duration:"", description:"Un efecto de pestañas con identidad propia. Vale te orientará sobre el resultado." },
-    { id:"avispa", name:"Efecto avispa", category:"extensiones", price:"", duration:"", description:"Uno de los diseños disponibles en VAL Lashes. Consultá sus características con Vale." },
-    { id:"lifting", name:"Lifting de pestañas", category:"natural", price:"", duration:"", description:"Realce de pestañas naturales. Consultá con Vale el procedimiento y sus cuidados." },
-    { id:"retoques", name:"Retoques o mantenimiento", category:"mantenimiento", price:"", duration:"", description:"Mantenimiento de extensiones según su estado y valoración previa." },
-    { id:"retiro", name:"Retiro de extensiones", category:"mantenimiento", price:"", duration:"", description:"Retiro de extensiones mediante el procedimiento que realiza Vale." },
-    { id:"cejas", name:"Cejas", category:"complementarios", price:"", duration:"", description:"Servicio complementario. Próximamente, detalles de las técnicas disponibles." },
-    { id:"cera", name:"Depilación con cera", category:"complementarios", price:"", duration:"", description:"Servicio complementario. Consultá las zonas que atiende Vale." }
+    { id:"clasicas", name:"Extensiones clásicas", category:"extensiones", price:"₡10.000", duration:"", description:"Extensiones clásicas para realzar tu mirada con delicadeza." },
+    { id:"hibridas", name:"Extensiones híbridas", category:"extensiones", price:"₡10.000", duration:"", description:"Una alternativa de extensiones para personalizar tu mirada." },
+    { id:"hawaianas", name:"Hawaianas", category:"extensiones", price:"₡10.000", duration:"", description:"Diseño de pestañas hawaianas. Consultá el resultado con Vale." },
+    { id:"egipcias", name:"Egipcias", category:"extensiones", price:"₡12.000", duration:"", description:"Diseño de pestañas egipcias. Consultá su acabado y disponibilidad." },
+    { id:"volumen3d", name:"Volumen 3D", category:"extensiones", price:"₡12.000", duration:"", description:"Extensiones de volumen 3D, con detalles a consultar." },
+    { id:"volumen5d", name:"Volumen 5D", category:"extensiones", price:"₡12.000", duration:"", description:"Extensiones de volumen 5D, con detalles a consultar." },
+    { id:"volumen6d", name:"Volumen 6D", category:"extensiones", price:"₡12.000", duration:"", description:"Extensiones de volumen 6D, con detalles a consultar." },
+    { id:"megavolumen", name:"Mega volumen", category:"extensiones", price:"₡15.000", duration:"", description:"Mega volumen, con evaluación del diseño adecuado durante la consulta." },
+    { id:"rimel", name:"Efecto rímel", category:"extensiones", price:"", duration:"", description:"Consultá el precio y las características de este efecto." },
+    { id:"avispa", name:"Efecto avispa", category:"extensiones", price:"", duration:"", description:"Consultá el precio y las características de este diseño." },
+    { id:"lifting", name:"Lifting de pestañas", category:"natural", price:"", duration:"", description:"Realce de pestañas naturales. Consultá el procedimiento y sus cuidados." },
+    { id:"retoques", name:"Retoques o mantenimiento", category:"mantenimiento", price:"", duration:"", description:"Mantenimiento según el estado de las extensiones y valoración previa." },
+    { id:"retiro", name:"Retiro de extensiones", category:"mantenimiento", price:"", duration:"", description:"Retiro de extensiones. Consultá el precio y procedimiento." },
+    { id:"cejas", name:"Cejas", category:"complementarios", price:"", duration:"", description:"Consultá las técnicas disponibles para cejas." },
+    { id:"cera", name:"Depilación con cera", category:"complementarios", price:"", duration:"", description:"Consultá las zonas de atención y sus tarifas." }
   ]
 };
