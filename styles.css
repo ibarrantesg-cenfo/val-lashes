@@ -31,3 +31,20 @@ html{scroll-padding-top:95px}
 #service-catalog .service-card a{margin-top:0}
 @media(max-width:930px){#service-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){#service-catalog{grid-template-columns:1fr}.catalog-controls{flex-wrap:nowrap;overflow-x:auto;padding-bottom:9px;scrollbar-width:thin}.catalog-filter{white-space:nowrap;flex:none}#service-catalog .service-card{min-height:320px}}
+
+/* Reservas v3.1: modalidades, domicilio y cotización antes de confirmar */
+.booking-info{border-left:3px solid #B96E8A;background:#fff7fa;border-radius:0 14px 14px 0;padding:16px 19px;margin:23px 0}
+.booking-info strong{font-size:.93rem}
+.booking-info p{font-size:.88rem;color:#6f5c66;margin:6px 0 0}
+.modality-field{border:0;margin:10px 0 2px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.modality-field legend{font-size:.78rem;font-weight:800;margin-bottom:8px}
+.booking-form .modality-option{margin:0;border:1px solid #ddc4ce;border-radius:12px;padding:13px 10px;display:flex;gap:8px;align-items:center;cursor:pointer;font-size:.83rem}
+.booking-form .modality-option:has(input:checked){border-color:#A5657E;background:#fff1f5}
+.booking-form .modality-option input{width:auto;min-height:auto;accent-color:#985a73;margin:0}
+#home-fields{display:flex;flex-direction:column;gap:7px}
+#home-fields[hidden]{display:none}
+.field-help{font-size:.74rem;color:#725d66;margin:0}
+.quote-notice{background:#FFF4F7;border:1px solid #EACCD7;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:5px;margin-top:11px}
+.quote-notice strong{font-size:.82rem}
+.quote-notice span{font-size:.78rem;color:#715c65}
+@media(max-width:420px){.modality-field{grid-template-columns:1fr}}
