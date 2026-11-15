@@ -5,7 +5,7 @@
    zona o distancia. No se calculan kilómetros ni se pide dirección exacta.
    WhatsApp: prefijo de país + número, ejemplo 506XXXXXXXX. */
 window.VAL_CONFIG = {
-  whatsapp: "",
+  whatsapp: "50687988375",
   instagram: "",
   publicLocation: "",
   openingHours: "",
