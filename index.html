@@ -47,14 +47,43 @@
   <section id="preguntas" class="section container faq-section">
     <div class="section-heading"><div><span class="eyebrow">ANTES DE TU CITA</span><h2>Preguntas <em>frecuentes.</em></h2></div><p>Respuestas claras para que sepas cómo funciona nuestra atención.</p></div>
     <div class="faq-list">
-      <details><summary>¿La cita queda confirmada al completar el formulario?</summary><p>No. El formulario prepara una consulta por WhatsApp. Vale te confirmará el horario personalmente.</p></details>
+      <details><summary>¿La cita queda confirmada al completar el formulario?</summary><p>No. El formulario prepara una consulta por WhatsApp. Vale confirmará primero el precio final, la disponibilidad y los detalles de atención.</p></details><details><summary>¿Puedo solicitar atención a domicilio?</summary><p>Sí. Podés indicar tu cantón o distrito al solicitar la cita. Vale revisará si puede atender esa zona y te confirmará el costo total, incluido cualquier traslado, antes de agendar.</p></details>
       <details><summary>¿Cómo sé qué servicio de pestañas elegir?</summary><p>Podés escribirnos qué efecto te gustaría conseguir. Vale te contará cuáles de sus servicios disponibles pueden ajustarse a lo que buscás.</p></details>
-      <details><summary>¿Dónde puedo ver precios y duración?</summary><p>Publicaremos los precios y tiempos de cada servicio cuando Vale confirme su catálogo. También podés consultarlos al escribirle.</p></details>
+      <details><summary>¿El precio es el mismo para domicilio y estudio?</summary><p>El monto puede variar según el servicio, la modalidad y la zona de traslado. Los precios de referencia, cuando estén publicados, no constituyen una cotización final.</p></details>
       <details><summary>¿Cómo se cuida la higiene durante la atención?</summary><p>Antes de publicar protocolos específicos, Vale verificará y documentará sus prácticas de higiene y preparación de herramientas y espacio.</p></details>
       <details><summary>¿Qué ocurre si tengo molestias o alguna reacción?</summary><p>Informá de inmediato cualquier molestia durante la aplicación. Si aparecen dolor, enrojecimiento intenso, hinchazón o alteraciones de la visión, solicitá valoración médica; no esperés una respuesta por redes sociales.</p></details>
     </div>
   </section>
-  <section id="reservar" class="section booking"><div class="container booking-grid"><div><span class="eyebrow">TU PRÓXIMA CITA</span><h2>Hagamos espacio para <em>tu mirada.</em></h2><p>Elegí el servicio, contanos qué día te funciona y prepararemos un mensaje para consultar disponibilidad por WhatsApp.</p><p id="booking-setup-note" class="small-note setup-note" hidden></p><p class="small-note">La solicitud no confirma la cita. Vale responderá para coordinar según su disponibilidad.</p></div><form id="booking-form" class="booking-form"><label for="service">Servicio</label><select id="service" required><option value="">Seleccioná un servicio</option></select><label for="date">Día que preferís</label><input type="date" id="date" required /><label for="time">Horario preferido</label><input type="time" id="time" required /><label for="message">¿Querés agregar algo? (opcional)</label><textarea id="message" rows="3" maxlength="250" placeholder="Una consulta o preferencia"></textarea><button type="submit" class="btn btn-primary">Preparar consulta por WhatsApp ↗</button><p id="form-feedback" role="status" class="small-note"></p></form></div></section>
+  <section id="reservar" class="section booking"><div class="container booking-grid">
+  <div><span class="eyebrow">TU PRÓXIMA CITA</span><h2>Un momento para <em>tu mirada.</em></h2>
+    <p>Elegí lo que te gustaría hacerte y cómo preferís recibir la atención. Nos contás tu disponibilidad y Vale revisará las opciones con vos.</p>
+    <div class="booking-info"><strong>Atención en estudio o a domicilio</strong><p>El total puede variar según el servicio, la modalidad, la zona de traslado y las condiciones de atención. Te confirmaremos el precio final <strong>antes</strong> de agendar.</p></div>
+    <p id="booking-setup-note" class="small-note setup-note" hidden></p>
+    <p class="small-note">Este formulario solo prepara un mensaje para WhatsApp. No registra ni confirma automáticamente una cita.</p>
+  </div>
+  <form id="booking-form" class="booking-form">
+    <label for="client-name">¿Cómo te llamás?</label>
+    <input type="text" id="client-name" maxlength="70" autocomplete="given-name" placeholder="Tu nombre" required />
+    <label for="service">Servicio que te interesa</label>
+    <select id="service" required><option value="">Seleccioná un servicio</option></select>
+    <fieldset class="modality-field"><legend>Modalidad de atención</legend>
+      <label class="modality-option"><input type="radio" name="modality" value="estudio" checked /> En el estudio</label>
+      <label class="modality-option"><input type="radio" name="modality" value="domicilio" /> A domicilio</label>
+    </fieldset>
+    <div id="home-fields" hidden>
+      <label for="district">Cantón o distrito para el servicio a domicilio</label>
+      <input type="text" id="district" maxlength="100" autocomplete="off" placeholder="Ej. Desamparados, San José" />
+      <p class="field-help">Por seguridad, no escribás tu dirección exacta aquí. Vale coordinará los detalles de forma privada después.</p>
+    </div>
+    <label for="date">Día que preferís</label><input type="date" id="date" required />
+    <label for="time">Horario preferido</label><input type="time" id="time" required />
+    <label for="message">¿Algo que debamos saber? (opcional)</label>
+    <textarea id="message" rows="3" maxlength="250" placeholder="Contanos tus dudas o preferencias. No incluyás datos médicos ni dirección exacta."></textarea>
+    <div class="quote-notice"><strong>Solicitud de cotización y disponibilidad</strong><span>El precio final y el horario están sujetos a confirmación de Vale. En modalidad a domicilio puede existir un cargo por traslado.</span></div>
+    <button type="submit" class="btn btn-primary">Consultar por WhatsApp ↗</button>
+    <p id="form-feedback" role="status" aria-live="polite" class="small-note"></p>
+  </form>
+</div></section>
   </main>
   <footer class="site-footer"><div class="container footer-grid"><div><img src="assets/logo-val.svg" alt="VAL Lashes" width="170" height="48"/><p>Tu mirada, cuidada en cada detalle.</p></div><div><strong>Explorá</strong><a href="#servicios">Servicios</a><a href="#resultados">Resultados</a><a href="#cuidado">Nuestro cuidado</a></div><div><strong>Conectemos</strong><a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Instagram de VAL Lashes ↗</a><span id="public-location" hidden></span><span id="opening-hours" hidden></span><span>Reservas sujetas a confirmación.</span></div></div><div class="container footer-bottom">© <span id="year"></span> VAL Lashes · Sitio en preparación.</div></footer>
 </body>
