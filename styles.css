@@ -48,3 +48,9 @@ html{scroll-padding-top:95px}
 .quote-notice strong{font-size:.82rem}
 .quote-notice span{font-size:.78rem;color:#715c65}
 @media(max-width:420px){.modality-field{grid-template-columns:1fr}}
+
+/* Reservas v3.2: precio base de referencia y traslado sujeto a cotización */
+.quote-preview{background:#fffaf6;border:1px solid #e8d5dc;border-radius:16px;padding:17px;margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.quote-preview strong{font-size:.84rem;color:#573947}
+.quote-preview p{font-size:.82rem;color:#725d66;margin:0;overflow-wrap:anywhere}
+.quote-preview .quote-total{font-size:.79rem;margin-top:5px;color:#8b4665}
