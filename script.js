@@ -50,7 +50,7 @@ services.forEach((entry,i)=>{
   const duration=typeof entry.duration==='string'?entry.duration.trim():'';
   details.textContent=[base?'Precio base: '+base:'Precio base: por confirmar',duration?'Duración: '+duration:''].filter(Boolean).join(' · ');
   const link=document.createElement('a');link.href='#reservar';link.textContent='Consultar cita ↗';
-  link.addEventListener('click',()=>{serviceSelect.value=entry.id;});
+  link.addEventListener('click',()=>{serviceSelect.value=entry.id;serviceSelect.dispatchEvent(new Event('change',{bubbles:true}));});
   card.append(visual,tag,title,description,details,link);catalog.append(card);
   const option=document.createElement('option');option.value=entry.id;option.textContent=entry.name;serviceSelect.append(option);
 });
