@@ -38,7 +38,7 @@ document.querySelectorAll('[data-service]').forEach(link=>link.addEventListener(
 document.querySelectorAll('[data-service-meta]').forEach(target=>{
   const entry=servicesByName.get(target.dataset.serviceMeta);
   const parts=[entry?.price,entry?.duration].filter(v=>typeof v==='string' && v.trim());
-  if(parts.length){target.textContent=parts.join(' · ');}else{target.hidden=true;}
+  if(parts.length){target.textContent=parts.join(' · ');target.hidden=false;}else{target.textContent='';target.hidden=true;}
 });
 
 function setTextIfProvided(selector,value,prefix='') {
