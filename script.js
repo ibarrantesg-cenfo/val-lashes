@@ -105,37 +105,67 @@ if(!validPhone){
   note.hidden=false;
   note.textContent='Las consultas por WhatsApp todavía no están habilitadas. Este formulario es una vista de demostración.';
 }
-document.querySelector('#booking-form').addEventListener('submit',event=>{
+// Revisión de datos antes de salir a WhatsApp; no guarda solicitudes ni confirma citas.
+const bookingForm=document.querySelector('#booking-form');
+const review=document.querySelector('#request-review');
+const reviewText=document.querySelector('#request-text');
+const sendButton=document.querySelector('#send-request');
+let preparedMessage='';
+bookingForm.addEventListener('input',()=>{
+  review.hidden=true;
+  preparedMessage='';
+});
+bookingForm.addEventListener('change',()=>{
+  review.hidden=true;
+  preparedMessage='';
+});
+document.querySelector('#edit-request').addEventListener('click',()=>{
+  review.hidden=true;
+  preparedMessage='';
+  document.querySelector('#client-name').focus();
+});
+bookingForm.addEventListener('submit',event=>{
   event.preventDefault();
   feedback.textContent='';
-  if(!event.currentTarget.reportValidity())return;
-  if(!validPhone){feedback.textContent='No se envió ninguna solicitud: falta configurar el WhatsApp de VAL Lashes.';return;}
+  if(!bookingForm.reportValidity())return;
   const client=document.querySelector('#client-name').value.trim();
   const selectedService=services.find(item=>item.id===serviceSelect.value);
-  const service=selectedService?.name;
-  const base=typeof selectedService?.price==='string'?selectedService.price.trim():'';
   const mode=selectedModality();
   const district=districtInput.value.trim();
   const date=dateInput.value;
   const time=document.querySelector('#time').value;
   const msg=document.querySelector('#message').value.trim();
-  if(!service){feedback.textContent='Seleccioná un servicio del catálogo.';return;}
+  if(!client){feedback.textContent='Escribí tu nombre para continuar.';return;}
+  if(!selectedService){feedback.textContent='Seleccioná un servicio del catálogo.';return;}
   if(date<localISODate(new Date())){feedback.textContent='Seleccioná una fecha de hoy en adelante.';return;}
   if(mode==='domicilio'&&!district){feedback.textContent='Indicá el cantón o distrito para cotizar el traslado.';return;}
-  const lines=[
+  const base=typeof selectedService.price==='string'?selectedService.price.trim():'';
+  preparedMessage=[
     '¡Hola, Vale! Me gustaría consultar una cita en VAL Lashes.',
     'Nombre: '+client,
-    'Servicio: '+service,
+    'Servicio: '+selectedService.name,
     'Precio base publicado: '+(base||'Por confirmar'),
     'Modalidad: '+(mode==='domicilio'?'A domicilio':'En el estudio'),
-    ...(mode==='domicilio'?['Zona de atención: '+district,'Traslado: pendiente de cotización según zona o distancia']:[]),
+    ...(mode==='domicilio'?['Zona de atención: '+district,'Traslado: pendiente de cotización personalizada según zona o distancia']:[]),
     'Fecha preferida: '+date,
     'Hora preferida: '+time,
     ...(msg?['Consulta: '+msg]:[]),
-    'Solicito confirmar el precio final (incluido el traslado, cuando corresponda) y disponibilidad antes de reservar.'
-  ];
-  const url='https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
-  feedback.textContent='Se abrirá WhatsApp con tu consulta preparada. Enviá el mensaje para contactar a Vale.';
+    'Solicito confirmar el precio final y la disponibilidad antes de reservar.'
+  ].join('\n');
+  reviewText.textContent=preparedMessage;
+  review.hidden=false;
+  sendButton.disabled=!validPhone;
+  if(!validPhone){
+    feedback.textContent='Vista previa lista. Aún no se puede enviar: falta configurar el WhatsApp comercial.';
+  } else {
+    feedback.textContent='Revisá el mensaje y tocá «Abrir WhatsApp» cuando estés lista.';
+  }
+  review.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+sendButton.addEventListener('click',()=>{
+  if(!preparedMessage || !validPhone)return;
+  const url='https://wa.me/'+phone+'?text='+encodeURIComponent(preparedMessage);
+  feedback.textContent='Se abrirá WhatsApp con el mensaje preparado. Recordá presionar Enviar allí.';
   const win=window.open(url,'_blank','noopener,noreferrer');
   if(!win) window.location.assign(url);
 });
