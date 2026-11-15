@@ -64,3 +64,9 @@ html{scroll-padding-top:95px}
 .review-edit{border:1px solid #d0aabc;background:white;border-radius:50px;padding:13px 20px;font-weight:800;color:#6e4256}
 .review-actions .btn{flex:1;min-width:185px}
 .review-actions .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+/* Retrato de Vale, versión con imagen optimizada y estado alternativo */
+.about-photo.about-portrait{overflow:hidden;background:#f0d8df;display:block;border:0}
+.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 19%;display:block}
+.about-portrait .photo-fallback{height:100%;width:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
+.about-portrait .photo-fallback[hidden]{display:none}
